@@ -1,0 +1,1974 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Naseer Khan | portofolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const hero = document.querySelector("#home");
+      const video = document.querySelector("#heroVideo");
+      const soundButton = document.querySelector(".hero-sound");
+
+      if (!hero || !video) return;
+
+      let soundEnabled = false;
+
+      // Start muted
+      video.muted = true;
+
+      if (soundButton) {
+        soundButton.addEventListener("click", async () => {
+          soundEnabled = !soundEnabled;
+
+          video.muted = !soundEnabled;
+
+          if (soundEnabled) {
+            try {
+              await video.play();
+            } catch (error) {
+              console.log("Video play blocked:", error);
+            }
+          }
+
+          if (soundEnabled) {
+            soundButton.innerHTML = `
+          🔊
+          <span class="hero-sound-label">
+            Sound off
+          </span>
+        `;
+
+            soundButton.setAttribute("aria-label", "Turn sound off");
+          } else {
+            soundButton.innerHTML = `
+          🔇
+          <span class="hero-sound-label">
+            Sound on
+          </span>
+        `;
+
+            soundButton.setAttribute("aria-label", "Turn sound on");
+          }
+        });
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            /*
+             * Home section is visible
+             */
+
+            if (entry.isIntersecting) {
+              video.muted = !soundEnabled;
+
+              video.play().catch((error) => {
+                console.log("Video resume blocked:", error);
+              });
+            } else {
+              video.pause();
+            }
+          });
+        },
+        {
+          threshold: 0.35,
+        },
+      );
+
+      observer.observe(hero);
+
+      video.muted = true;
+
+      video.play().catch(() => {});
+    });
+  </script>
+
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container">
+        <nav class="nav" aria-label="Main navigation">
+          <div style="display: flex; align-items: center; gap: 18px">
+            <a class="brand" href="#home">Naseer Khan</a>
+          </div>
+
+          <div
+            class="nav-links"
+            id="desktop-links"
+            role="navigation"
+            aria-label="Desktop links"
+          >
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#internships">Internships</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <div class="nav-controls">
+            <button
+              id="theme-toggle"
+              class="icon-btn"
+              title="Toggle theme"
+              aria-label="Toggle theme"
+            >
+              <i class="fas fa-moon" id="moon-icon"></i>
+              <i class="fas fa-sun" id="sun-icon" style="display: none"></i>
+            </button>
+
+            <button
+              id="mobile-menu-button"
+              class="icon-btn"
+              aria-label="Open mobile menu"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Mobile menu hidden by default; JS toggles .open -->
+      <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <div class="container menu-inner">
+          <a href="#home" class="mobile-link">Home</a>
+          <a href="#about" class="mobile-link">About</a>
+          <a href="#projects" class="mobile-link">Projects</a>
+          <a href="#skills" class="mobile-link">Skills</a>
+          <a href="#internships" class="mobile-link">Internships</a>
+          <a href="#certifications" class="mobile-link">Certifications</a>
+          <a href="#contact" class="mobile-link">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="hero" aria-label="Home">
+        <video
+          id="heroVideo"
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster="images/Naseerkhan.png"
+          aria-hidden="true"
+        >
+          <source src="videos/portfolio-bg.mp4" type="video/mp4" />
+        </video>
+
+        <div class="hero-video-overlay"></div>
+
+        <button
+          id="soundToggle"
+          class="hero-sound"
+          type="button"
+          aria-label="Turn sound on"
+          title="Turn sound on"
+        >
+          <i id="soundIcon" class="fas fa-volume-xmark"></i>
+          <span class="hero-sound-label">Sound off</span>
+        </button>
+
+        <div class="hero-content">
+          <div class="container">
+            <div class="hero-left">
+              <div class="hero-status">
+                <span class="hero-status-dot"></span>
+                Open to Software Developer or IT opportunities
+              </div>
+
+              <p class="hero-kicker">
+                • Software Developer • AI/ML Engineer • Python • Full Stack
+              </p>
+
+              <h1>
+                Hi, I'm Naseer.
+                <span class="hero-highlight"
+                  >I build software that solves real problems.</span
+                >
+              </h1>
+
+              <p class="hero-description">
+                A fresher in Artificial Intelligence &amp; Data Science, AI & ML
+                Engineer and Full Stack, looking for an opportunity to learn,
+                contribute and prove myself by building useful software.
+              </p>
+
+              <div class="hero-actions">
+                <a class="btn-primary" href="#projects">
+                  Explore my work
+                  <i class="fas fa-arrow-right" style="margin-left: 10px"></i>
+                </a>
+
+                <a
+                  id="resumeLink"
+                  href="Certificates/NaseerKhan_Resume.pdf"
+                  class="btn-outline"
+                  target="_blank"
+                >
+                  <i class="fas fa-download" style="margin-right: 8px"></i>
+                  Download Resume
+                </a>
+
+              </div>
+
+              <div class="hero-stats">
+                <div class="hero-stat">
+                  <strong>5+</strong>
+                  <span>Real projects</span>
+                </div>
+                <div class="hero-stat">
+                  <strong>4</strong>
+                  <span>Internships</span>
+                </div>
+                <div class="hero-stat">
+                  <strong>100+</strong>
+                  <span>DSA problems</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" style="background: transparent">
+        <div class="container">
+          <h2 class="section-title">
+            About <span class="gradient-text">Me</span>
+          </h2>
+
+          <div class="about-row">
+            <div class="about-left">
+              <div class="about-card">
+                <img
+                  src="images/Naseerkhan.png"
+                  alt="Naseer Khan"
+                  style="width: 100%; height: 100%; object-fit: cover"
+                />
+              </div>
+            </div>
+
+            <div class="about-right">
+              <h3 style="margin: 0 0 8px; font-size: 1.25rem">Who I Am</h3>
+              <p
+                style="
+                  color: var(--muted);
+                  text-align: justify;
+                  margin: 0 0 12px;
+                "
+              >
+                B.Tech graduate in Artificial Intelligence and Data Science
+                (2026) with a strong foundation in software development,
+                full-stack web development, AI/ML, and problem-solving.
+                Proficient in Python, Java, JavaScript, SQL, React.js, Node.js,
+                and Express.js, with a solid understanding of Data Structures
+                and Algorithms, OOP, DBMS, Operating Systems, Computer Networks,
+                and Software Engineering. Hands-on experience building and
+                deploying web applications using REST APIs, MongoDB, Git,
+                GitHub, and Vercel, with knowledge of backend development, API
+                integration, authentication, database management, and
+                application deployment. Familiar with Machine Learning, data
+                cleaning, data preprocessing, and data handling. Strong
+                analytical and problem-solving abilities, seeking an entry-level
+                Software Engineer, AI/ML Engineer, Python Developer or
+                Full-Stack Developer role where I can contribute to real-world
+                projects, learn new technologies, and grow as a software
+                professional.
+              </p>
+              <div style="display: flex; gap: 20px; flex-wrap: wrap">
+                <div class="info-box" style="flex: 1; min-width: 250px">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 12px;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: rgba(16, 185, 129, 0.08);
+                        border-radius: 50%;
+                        padding: 10px;
+                      "
+                    >
+                      <i
+                        class="fas fa-graduation-cap"
+                        style="color: var(--secondary-light)"
+                      ></i>
+                    </div>
+                    <h4 style="margin: 0">Bachelor of Technology</h4>
+                  </div>
+                  <p>
+                    AI & DS<br />LBRCE, Mylavaram<br />2023-2026<br />CGPA :-
+                    8.53
+                  </p>
+                </div>
+
+                <div class="info-box" style="flex: 1; min-width: 250px">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 12px;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: rgba(16, 185, 129, 0.08);
+                        border-radius: 50%;
+                        padding: 10px;
+                      "
+                    >
+                      <i
+                        class="fas fa-graduation-cap"
+                        style="color: var(--secondary-light)"
+                      ></i>
+                    </div>
+                    <h4 style="margin: 0">Diploma Education</h4>
+                  </div>
+                  <p>
+                    Computer Science Engineering<br />Nuzvid Polytechnic
+                    College, Nuzvid<br />
+                    2020-2023<br />Percentage :- 77.54%
+                  </p>
+                </div>
+
+                <div class="info-box" style="flex: 1; min-width: 250px">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 12px;
+                      margin-bottom: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: rgba(16, 185, 129, 0.08);
+                        border-radius: 50%;
+                        padding: 10px;
+                      "
+                    >
+                      <i
+                        class="fas fa-graduation-cap"
+                        style="color: var(--secondary-light)"
+                      ></i>
+                    </div>
+                    <h4 style="margin: 0">Secondary School (SSC)</h4>
+                  </div>
+                  <p>
+                    Telugu Medium<br />S.R.R.Z.P. High School, Nuzvid<br />
+                    2019-2020<br />Percentage :- 88.33%
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects">
+        <div class="container">
+          <h2 class="section-title">
+            My <span class="gradient-text">Projects</span>
+          </h2>
+
+          <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card">
+              <div class="thumb">
+                <img src="images/Industrial.png" alt="Project 6" />
+              </div>
+              <div class="card-body">
+                <h3 style="margin: 0 0 6px">Industrial Vision Framework</h3>
+                <p
+                  style="
+                    color: var(--muted);
+                    text-align: justify;
+                    margin: 0 0 10px;
+                  "
+                >
+                  Developed a real-time industrial computer vision system for
+                  object detection and quality inspection, applying image
+                  processing techniques to improve detection performance and
+                  designing a modular framework for multi-camera inspection.
+                </p>
+                <div style="margin: 8px 0">
+                  <span class="tag">C#</span>
+                  <span class="tag">Window Forms</span>
+                  <span class="tag">AETC</span>
+                  <span class="tag">Computer Vision</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+              <div class="thumb">
+                <img src="images/robot.jpg" alt="Project 2" />
+              </div>
+              <div class="card-body">
+                <h3 style="margin: 0 0 6px">
+                  Smart Robotic Vehicle With Obstacle Avoidence & Voice
+                  Assistant
+                </h3>
+                <p
+                  style="
+                    color: var(--muted);
+                    text-align: justify;
+                    margin: 0 0 10px;
+                  "
+                >
+                  Designed and developed a voice-controlled robotic vehicle
+                  integrated with obstacle avoidance and live streaming
+                  capabilities. The system processes voice commands to control
+                  movement, uses sensors to detect and avoid obstacles in real
+                  time, and provides live video streaming for remote monitoring
+                  and navigation.
+                </p>
+                <div style="margin: 8px 0">
+                  <span class="tag">AI/IOT</span>
+                  <span class="tag">Python</span>
+                  <span class="tag">Sensors</span>
+                  <span class="tag">OpenCV</span>
+                  <span class="tag">Raspberry Pi</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    gap: 12px;
+                    margin-left: 18px;
+                    margin-top: 8px;
+                  "
+                >
+                  <a
+                    class="fab fa-github"
+                    href="https://github.com/naseerkhan-pathan/Smart_Robotic_Vehicle"
+                    style="color: var(--muted)"
+                    ><small> Github</small></a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+              <div class="thumb">
+                <img src="images/Picture1.jpg" alt="Project 3" />
+              </div>
+              <div class="card-body">
+                <h3 style="margin: 0 0 6px">Sleep Detection System</h3>
+                <p
+                  style="
+                    color: var(--muted);
+                    text-align: justify;
+                    margin: 0 0 10px;
+                  "
+                >
+                  Built a web-based sleep detection system using computer vision
+                  and image processing techniques. Leveraged OpenCV and
+                  MediaPipe to track facial landmarks and calculate eye aspect
+                  ratio (EAR) for detecting drowsiness. The system performs
+                  real-time analysis and triggers alerts when sleep patterns are
+                  detected.
+                </p>
+                <div style="margin: 8px 0">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Express.js</span>
+                  <span class="tag">OpenCV</span>
+                  <span class="tag">MediaPipe</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    gap: 12px;
+                    margin-left: 18px;
+                    margin-top: 8px;
+                  "
+                >
+                  <a
+                    class="fab fa-github"
+                    href="https://github.com/naseerkhan-pathan/Sleep_Detection"
+                    style="color: var(--muted)"
+                    ><small> Github</small></a
+                  >
+                  <a
+                    class="fas fa-external-link-alt"
+                    href="https://sleep-detection.vercel.app/"
+                    target="_blank"
+                    style="color: var(--accent)"
+                    ><small> Live Demo</small></a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="thumb">
+                <img src="images/wedding.jpg" alt="Project 4" />
+              </div>
+              <div class="card-body">
+                <h3 style="margin: 0 0 6px">Wedding Planner Website</h3>
+                <p
+                  style="
+                    color: var(--muted);
+                    text-align: justify;
+                    margin: 0 0 10px;
+                  "
+                >
+                  Developed a full-stack wedding planning web application using
+                  MERN stack technologies. The platform allows users to organize
+                  wedding events, manage budgets, explore vendor options, and
+                  schedule activities through an intuitive and responsive
+                  interface.
+                </p>
+                <div style="margin: 8px 0">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Express.js</span>
+                  <span class="tag">JWT</span>
+                  <span class="tag">REST API</span>
+                  <span class="tag">MongoDB</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    gap: 12px;
+                    margin-left: 18px;
+                    margin-top: 8px;
+                  "
+                >
+                  <a
+                    class="fab fa-github"
+                    href="https://github.com/naseerkhan-pathan/Wedding_Planner"
+                    style="color: var(--muted)"
+                    ><small> Github</small></a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="thumb">
+                <img src="images/Multi_dieseas.png" alt="Project 5" />
+              </div>
+              <div class="card-body">
+                <h3 style="margin: 0 0 6px">
+                  Multi Disease Prediction & Risk Analysis
+                </h3>
+                <p
+                  style="
+                    color: var(--muted);
+                    text-align: justify;
+                    margin: 0 0 10px;
+                  "
+                >
+                  Developed a web-based machine learning system for
+                  multi-disease risk prediction, implementing ML algorithms to
+                  analyze health data and assess risk levels, with interactive
+                  data visualizations for clear interpretation of prediction
+                  results.
+                </p>
+                <div style="margin: 8px 0">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Python</span>
+                  <span class="tag">Machine Learning</span>
+                  <span class="tag">Pandas</span>
+                  <span class="tag">NumPy</span>
+                  <span class="tag">Data Preprocessing</span>
+                  <span class="tag">Data Visualization</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    gap: 12px;
+                    margin-left: 18px;
+                    margin-top: 8px;
+                  "
+                >
+                  <a
+                    class="fab fa-github"
+                    href="https://github.com/naseerkhan-pathan/Multi_Dieseas_Prediction"
+                    style="color: var(--muted)"
+                    ><small> Github</small></a
+                  >
+                  <a
+                    class="fas fa-external-link-alt"
+                    href="https://multi-dieseas-prediction-vo27.onrender.com/"
+                    target="_blank"
+                    style="color: var(--accent)"
+                    ><small> Live Demo</small></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="container">
+          <h2 class="section-title">My <span>Skills</span></h2>
+
+          <div class="skills-container">
+            <!-- Programming Languages -->
+            <div class="skill-card">
+              <h3>Programming Languages</h3>
+
+              <div class="skill-tags">
+                <span><i class="fab fa-python"></i> Python</span>
+                <span><i class="fab fa-java"></i> Java</span>
+              </div>
+            </div>
+
+            <!-- Frontend -->
+            <div class="skill-card">
+              <h3>Frontend</h3>
+
+              <div class="skill-tags">
+                <span><i class="fab fa-html5"></i> HTML</span>
+                <span><i class="fab fa-css3-alt"></i> CSS</span>
+                <span><i class="fab fa-js"></i> JavaScript</span>
+                <span><i class="fab fa-react"></i> React.js</span>
+              </div>
+            </div>
+
+            <!-- Backend -->
+            <div class="skill-card">
+              <h3>Backend</h3>
+
+              <div class="skill-tags">
+                <span><i class="fab fa-node-js"></i> Node.js</span>
+                <span><i class="fas fa-server"></i> Express.js</span>
+                <span><i class="fas fa-plug"></i> REST APIs</span>
+                <span><i class="fas fa-lock"></i> JWT</span>
+              </div>
+            </div>
+
+            <!-- Database -->
+            <div class="skill-card">
+              <h3>Database & Data Handling</h3>
+
+              <div class="skill-tags">
+                <span><i class="fas fa-database"></i> MySQL</span>
+                <span><i class="fas fa-database"></i> MongoDB</span>
+                <span><i class="fas fa-table"></i> Data Handling</span>
+              </div>
+            </div>
+
+            <!-- AI / Machine Learning -->
+            <div class="skill-card">
+              <h3>AI / Machine Learning</h3>
+
+              <div class="skill-tags">
+                <span><i class="fas fa-brain"></i> Machine Learning</span>
+                <span><i class="fas fa-chart-bar"></i> Data Visualization</span>
+                <span><i class="fas fa-calculator"></i> NumPy</span>
+                <span><i class="fas fa-table"></i> Pandas</span>
+                <span><i class="fas fa-eye"></i> OpenCV</span>
+                <span><i class="fas fa-broom"></i> Data Cleaning</span>
+                <span><i class="fas fa-cogs"></i> Data Preprocessing</span>
+                
+
+              </div>
+            </div>
+
+            <!-- Engineering -->
+            <div class="skill-card">
+              <h3>Engineering</h3>
+
+              <div class="skill-tags">
+                <span><i class="fas fa-cube"></i> OOP</span>
+                <span><i class="fas fa-project-diagram"></i> DSA</span>
+                <span><i class="fas fa-code-branch"></i> SDLC</span>
+                <span><i class="fas fa-desktop"></i> OS</span>
+                <span><i class="fas fa-network-wired"></i> CN</span>
+                <span><i class="fas fa-lightbulb"></i> Problem Solving</span>
+              </div>
+            </div>
+
+            <!-- Tools -->
+            <div class="skill-card">
+              <h3>Tools</h3>
+
+              <div class="skill-tags">
+                <span><i class="fab fa-git-alt"></i> Git</span>
+                <span><i class="fab fa-github"></i> GitHub</span>
+                <span><i class="fas fa-code"></i> VS Code</span>
+                <span><i class="fab fa-google"></i> Colab</span>
+                <span><i class="fas fa-plug"></i> Postman</span>
+              </div>
+            </div>
+
+            <!-- Deployment -->
+            <div class="skill-card">
+              <h3>Deployment</h3>
+
+              <div class="skill-tags">
+                <span><i class="fas fa-cloud"></i> Vercel</span>
+                <span><i class="fas fa-server"></i> Render</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="internships"
+        style="background: transparent; padding: 60px 0"
+      >
+        <div class="container">
+          <h2
+            class="section-title"
+            style="text-align: center; margin-bottom: 40px"
+          >
+            My <span class="gradient-text">Internships</span>
+          </h2>
+
+          <div
+            class="intern-grid"
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 25px;
+            "
+          >
+            <!-- Internship 1 -->
+            <div
+              class="project-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                overflow: hidden;
+                transition: all 0.4s ease;
+              "
+            >
+              <div class="thumb">
+                <img
+                  src="images/data_valley.png"
+                  alt="Data Valley Private Limited"
+                  style="width: 100%; height: 180px; object-fit: cover"
+                />
+              </div>
+              <div class="card-body" style="padding: 18px">
+                <h3 style="margin: 0 0 6px">
+                  Data Valley Private Limited Internships
+                </h3>
+                <p style="color: var(--muted); margin: 0">
+                  From: DEC 2025 – To: MAR 2026
+                </p>
+                <p style="margin: 6px 0 10px">
+                  <strong>Role:</strong> Python FUll-Stack Intern
+                </p>
+                <p style="color: var(--muted); margin: 0 0 10px">
+                  Gained hands-on experience in Python full stack development,
+                  building scalable web applications using modern frontend and
+                  backend technologies.
+                </p>
+                <p style="margin: 6px 0 10px">
+                  <strong>Project:</strong> Clothing Store Website
+                </p>
+                <div style="margin: 8px 0">
+                  <span class="tag">React</span>
+                  <span class="tag">Flask</span>
+                  <span class="tag">MongoDB</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 10px;
+                  "
+                >
+                  <button
+                    class="view-btn"
+                    data-img="Certificates/Data_Valley.png"
+                  >
+                    View Certificate
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="project-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                overflow: hidden;
+                transition: all 0.4s ease;
+              "
+            >
+              <div class="thumb">
+                <img
+                  src="images/SH&IS.jpg"
+                  alt="smart homes Internship"
+                  style="width: 100%; height: 180px; object-fit: cover"
+                />
+              </div>
+              <div class="card-body" style="padding: 18px">
+                <h3 style="margin: 0 0 6px">SH & IS Internship</h3>
+                <p style="color: var(--muted); margin: 0">
+                  From: MAY 2025 – To: JUN 2025
+                </p>
+                <p style="margin: 6px 0 10px">
+                  <strong>Role:</strong> AI & IOT Intern
+                </p>
+                <p style="color: var(--muted); margin: 0 0 10px">
+                  Worked on AI solutions and IOT system development,automations.
+                </p>
+                <p style="margin: 6px 0 10px">
+                  <strong>Project:</strong> Smart Robotic Vehicle with Obstacle
+                  Avoidence
+                </p>
+                <div style="margin: 8px 0">
+                  <span class="tag">Python</span>
+                  <span class="tag">AI & IOT</span>
+                  <span class="tag">Raspberry Pi</span>
+                  <span class="tag">Automations</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 10px;
+                  "
+                >
+                  <button class="view-btn" data-img="Certificates/SH&IS.jpeg">
+                    View Certificate
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="project-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                overflow: hidden;
+                transition: all 0.4s ease;
+              "
+            >
+              <div class="thumb">
+                <img
+                  src="images/salesforce.png"
+                  alt="salesforce Internship"
+                  style="width: 100%; height: 180px; object-fit: cover"
+                />
+              </div>
+              <div class="card-body" style="padding: 18px">
+                <h3 style="margin: 0 0 6px">Salesforce VIP Internship</h3>
+                <p style="color: var(--muted); margin: 0">
+                  From: MAY 2025 – To: JUL 2025
+                </p>
+                <p style="margin: 6px 0 10px">
+                  <strong>Role:</strong> Salesforce Developer
+                </p>
+                <p style="color: var(--muted); margin: 0 0 10px">
+                  Worked on Salesforce application development, automation
+                  workflows.
+                </p>
+                <div style="margin: 8px 0">
+                  <span class="tag">Salesforce</span>
+                  <span class="tag">Trailhead</span>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 10px;
+                  "
+                >
+                  <button
+                    class="view-btn"
+                    data-img="Certificates/salesforce.png"
+                  >
+                    View Certificate
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="project-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                overflow: hidden;
+                transition: all 0.4s ease;
+              "
+            >
+              <div class="thumb">
+                <img
+                  src="images/bist.jpg"
+                  alt="Bist Internship"
+                  style="width: 100%; height: 180px; object-fit: cover"
+                />
+              </div>
+              <div class="card-body" style="padding: 18px">
+                <h3 style="margin: 0 0 6px">BIST Technologies Internship</h3>
+                <p style="color: var(--muted); margin: 0">
+                  From: JUN 2024 – To: JUL 2024
+                </p>
+                <p style="margin: 6px 0 10px">
+                  <strong>Role:</strong> Machine Learning Intern
+                </p>
+                <p style="color: var(--muted); margin: 0 0 10px">
+                  Worked on Machine Learning Algorithms and Opencv for live
+                  capturing.
+                </p>
+                <p style="margin: 6px 0 10px">
+                  <strong>Project:</strong> Face Counting system
+                </p>
+                <div style="margin: 8px 0">
+                  <span class="tag">Python</span>
+                  <span class="tag">Machine Learning</span>
+                  <span class="tag">OpenCV</span>
+                  <span class="tag">MediaPipe</span>
+                  <span class="tag">Data Preprocessing</span>
+                  <span class="tag">Data Cleaning</span>
+
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 10px;
+                  "
+                >
+                  <button class="view-btn" data-img="Certificates/Bist.png">
+                    View Certificate
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="certifications"
+        style="background: transparent; padding: 60px 0"
+      >
+        <div class="container">
+          <h2
+            class="section-title"
+            style="text-align: center; margin-bottom: 40px"
+          >
+            My <span class="gradient-text">Certifications</span>
+          </h2>
+
+          <div
+            class="cert-grid"
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+              gap: 25px;
+            "
+          >
+            <!-- Oracle Certification -->
+            <div
+              class="cert-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 25px;
+                text-align: center;
+                transition: all 0.4s ease;
+              "
+            >
+              <div
+                class="cert-icon"
+                style="
+                  background: rgba(59, 130, 246, 0.1);
+                  border-radius: 50%;
+                  display: inline-block;
+                  padding: 12px;
+                  margin-bottom: 12px;
+                "
+              >
+                <i
+                  class="fas fa-database"
+                  style="font-size: 26px; color: var(--primary-light)"
+                ></i>
+              </div>
+              <h3 style="margin: 10px 0; font-size: 18px; font-weight: 600">
+                OCI Genrative AI
+              </h3>
+              <p style="margin: 5px 0; font-size: 15px; opacity: 0.9">
+                <i class="fas fa-building"></i> Oracle Cloud
+              </p>
+              <p style="margin: 5px 0; font-size: 14px">
+                <i class="fas fa-calendar-alt"></i> OCT 2025
+              </p>
+              <button class="view-btn" data-img="Certificates/oracle.png">
+                View Certificate
+              </button>
+            </div>
+
+            <!-- Google Certification -->
+            <div
+              class="cert-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 25px;
+                text-align: center;
+              "
+            >
+              <div
+                class="cert-icon"
+                style="
+                  background: rgba(59, 130, 246, 0.1);
+                  border-radius: 50%;
+                  display: inline-block;
+                  padding: 12px;
+                  margin-bottom: 12px;
+                "
+              >
+                <i
+                  class="fab fa-google"
+                  style="font-size: 26px; color: var(--primary-light)"
+                ></i>
+              </div>
+              <h3 style="margin: 10px 0; font-size: 18px; font-weight: 600">
+                Google Analytics Certification
+              </h3>
+              <p style="margin: 5px 0; font-size: 15px; opacity: 0.9">
+                <i class="fas fa-building"></i> Google Cloud
+              </p>
+              <p style="margin: 5px 0; font-size: 14px">
+                <i class="fas fa-calendar-alt"></i> SEP 2025
+              </p>
+              <button class="view-btn" data-img="Certificates/Google.jpeg">
+                View Certificate
+              </button>
+            </div>
+
+            <!-- NodeJS -->
+            <div
+              class="cert-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 25px;
+                text-align: center;
+              "
+            >
+              <div
+                class="cert-icon"
+                style="
+                  background: rgba(59, 130, 246, 0.1);
+                  border-radius: 50%;
+                  display: inline-block;
+                  padding: 12px;
+                  margin-bottom: 12px;
+                "
+              >
+                <i
+                  class="fab fa-node-js"
+                  style="font-size: 24px; color: var(--primary-light)"
+                ></i>
+              </div>
+              <h3 style="margin: 10px 0; font-size: 18px; font-weight: 600">
+                Node.js
+              </h3>
+              <p style="margin: 5px 0; font-size: 15px; opacity: 0.9">
+                <i class="fas fa-building"></i> Infosys
+              </p>
+              <p style="margin: 5px 0; font-size: 14px">
+                <i class="fas fa-calendar-alt"></i> OCT 2024
+              </p>
+              <button class="view-btn" data-img="Certificates/node.js.png">
+                View Certificate
+              </button>
+            </div>
+
+            <!-- JavaScript -->
+            <div
+              class="cert-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 25px;
+                text-align: center;
+              "
+            >
+              <div
+                class="cert-icon"
+                style="
+                  background: rgba(59, 130, 246, 0.1);
+                  border-radius: 50%;
+                  display: inline-block;
+                  padding: 12px;
+                  margin-bottom: 12px;
+                "
+              >
+                <i
+                  class="fab fa-js"
+                  style="font-size: 24px; color: var(--primary-light)"
+                ></i>
+              </div>
+              <h3 style="margin: 10px 0; font-size: 18px; font-weight: 600">
+                JavaScript
+              </h3>
+              <p style="margin: 5px 0; font-size: 15px; opacity: 0.9">
+                <i class="fas fa-building"></i> Infosys
+              </p>
+              <p style="margin: 5px 0; font-size: 14px">
+                <i class="fas fa-calendar-alt"></i> OCT 2024
+              </p>
+              <button class="view-btn" data-img="Certificates/javascript.png">
+                View Certificate
+              </button>
+            </div>
+
+            <!-- HTML5 -->
+            <div
+              class="cert-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 25px;
+                text-align: center;
+              "
+            >
+              <div
+                class="cert-icon"
+                style="
+                  background: rgba(16, 185, 129, 0.1);
+                  border-radius: 50%;
+                  display: inline-block;
+                  padding: 12px;
+                  margin-bottom: 12px;
+                "
+              >
+                <i
+                  class="fab fa-html5"
+                  style="font-size: 26px; color: var(--secondary-light)"
+                ></i>
+              </div>
+              <h3 style="margin: 10px 0; font-size: 18px; font-weight: 600">
+                HTML5
+              </h3>
+              <p style="margin: 5px 0; font-size: 15px; opacity: 0.9">
+                <i class="fas fa-building"></i> Infosys
+              </p>
+              <p style="margin: 5px 0; font-size: 14px">
+                <i class="fas fa-calendar-alt"></i> AUG 2024
+              </p>
+              <button class="view-btn" data-img="Certificates/html.png">
+                View Certificate
+              </button>
+            </div>
+
+            <!-- Cybersecurity -->
+            <div
+              class="cert-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 25px;
+                text-align: center;
+              "
+            >
+              <div
+                class="cert-icon"
+                style="
+                  background: rgba(16, 185, 129, 0.1);
+                  border-radius: 50%;
+                  display: inline-block;
+                  padding: 12px;
+                  margin-bottom: 12px;
+                "
+              >
+                <i
+                  class="fas fa-shield-alt"
+                  style="font-size: 24px; color: var(--secondary-light)"
+                ></i>
+              </div>
+              <h3 style="margin: 10px 0; font-size: 18px; font-weight: 600">
+                Cybersecurity Essentials
+              </h3>
+              <p style="margin: 5px 0; font-size: 15px; opacity: 0.9">
+                <i class="fas fa-building"></i> Cisco
+              </p>
+              <p style="margin: 5px 0; font-size: 14px">
+                <i class="fas fa-calendar-alt"></i> JUN 2024
+              </p>
+              <button
+                class="view-btn"
+                data-img="Certificates/cybersecurity.png"
+              >
+                View Certificate
+              </button>
+            </div>
+
+            <!-- Python -->
+            <div
+              class="cert-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 25px;
+                text-align: center;
+              "
+            >
+              <div
+                class="cert-icon"
+                style="
+                  background: rgba(16, 185, 129, 0.1);
+                  border-radius: 50%;
+                  display: inline-block;
+                  padding: 12px;
+                  margin-bottom: 12px;
+                "
+              >
+                <i
+                  class="fab fa-python"
+                  style="font-size: 24px; color: var(--secondary-light)"
+                ></i>
+              </div>
+              <h3 style="margin: 10px 0; font-size: 18px; font-weight: 600">
+                Programming Essentials in Python
+              </h3>
+              <p style="margin: 5px 0; font-size: 15px; opacity: 0.9">
+                <i class="fas fa-building"></i> Cisco
+              </p>
+              <p style="margin: 5px 0; font-size: 14px">
+                <i class="fas fa-calendar-alt"></i> MAR 2024
+              </p>
+              <button class="view-btn" data-img="Certificates/python.png">
+                View Certificate
+              </button>
+            </div>
+
+            <!-- Java -->
+            <div
+              class="cert-card"
+              style="
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 12px;
+                padding: 25px;
+                text-align: center;
+              "
+            >
+              <div
+                class="cert-icon"
+                style="
+                  background: rgba(16, 185, 129, 0.1);
+                  border-radius: 50%;
+                  display: inline-block;
+                  padding: 12px;
+                  margin-bottom: 12px;
+                "
+              >
+                <i
+                  class="fab fa-java"
+                  style="font-size: 24px; color: var(--secondary-light)"
+                ></i>
+              </div>
+              <h3 style="margin: 10px 0; font-size: 18px; font-weight: 600">
+                Programming using Java
+              </h3>
+              <p style="margin: 5px 0; font-size: 15px; opacity: 0.9">
+                <i class="fas fa-building"></i> Infosys
+              </p>
+              <p style="margin: 5px 0; font-size: 14px">
+                <i class="fas fa-calendar-alt"></i> NOV 2023
+              </p>
+              <button class="view-btn" data-img="Certificates/java.png">
+                View Certificate
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <section id="achievements">
+          <div class="container">
+            <h2 class="section-title">
+              My <span class="gradient-text">Achievements</span>
+            </h2>
+
+            <div class="projects-grid">
+              <div class="project-card">
+                <div class="card-body">
+                  <h3>🏆 Best Project Award</h3>
+                  <p>
+                    Received Best Project Award for final year project in B.Tech
+                    (AI & Data Science) for developing an innovative and
+                    real-world solution.
+                  </p>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="card-body">
+                  <h3>💡 Real-Time Projects</h3>
+                  <p>
+                    Developed 5+ real-world projects including AI, MERN Stack,
+                    and IoT systems.
+                  </p>
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="card-body">
+                  <h3>🚀 Coding</h3>
+                  <p>Solved 100+ problems on LeetCode</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="hackathons">
+          <div class="container">
+            <h2 class="section-title">
+              Hackathons & <span class="gradient-text">Competitions</span>
+            </h2>
+
+            <div class="projects-grid">
+              <!-- EY Hackathon -->
+              <div class="project-card">
+                <div class="card-body">
+                  <h3>🏆 EY Hackathon</h3>
+                  <p>
+                    Participated in EY Hackathon, working on real-world
+                    problem-solving solutions.
+                  </p>
+                  <button class="view-btn" data-img="Certificates/EY.png">
+                    View Certificate
+                  </button>
+                </div>
+              </div>
+
+              <!-- Claude Challenge -->
+              <div class="project-card">
+                <div class="card-body">
+                  <h3>🤖 Claude AI Challenge</h3>
+                  <p>
+                    Participated in AI-based challenge focusing on intelligent
+                    solutions.
+                  </p>
+                  <button class="view-btn" data-img="Certificates/claude.png">
+                    View Certificate
+                  </button>
+                </div>
+              </div>
+
+              <!-- Adobe Hackathon -->
+              <div class="project-card">
+                <div class="card-body">
+                  <h3>💡 Adobe India Hackathon</h3>
+                  <p>
+                    Worked on scalable application ideas in a team environment.
+                  </p>
+                  <button class="view-btn" data-img="Certificates/adobe.png">
+                    View Certificate
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="profiles">
+          <div class="container">
+            <h2 class="section-title">
+              Social <span class="gradient-text">Profiles</span>
+            </h2>
+
+            <div class="projects-grid">
+              <div class="project-card">
+                <div class="card-body">
+                  <h3><i class="fab fa-github"></i> GitHub</h3>
+                  <p>Explore my projects and code repositories.</p>
+                  <a href="https://github.com/Lovely-Naseer" target="_blank"
+                    >View Profile</a
+                  >
+                </div>
+              </div>
+              <div class="project-card">
+                <div class="card-body">
+                  <h3><i class="fab fa-linkedin"></i> LinkedIn</h3>
+                  <p>Connect with me and view my professional profile.</p>
+                  <a
+                    href="https://www.linkedin.com/in/lovely-naseer/"
+                    target="_blank"
+                    >View Profile</a
+                  >
+                </div>
+              </div>
+
+              <div class="project-card">
+                <div class="card-body">
+                  <h3>🧠 LeetCode</h3>
+                  <p>Practicing Data Structures & Algorithms regularly.</p>
+                  <a
+                    href="https://leetcode.com/u/Lovely_Naseer/"
+                    target="_blank"
+                    >View Profile</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Certificate Modal -->
+        <div id="certModal" class="modal1">
+          <span class="close">&times;</span>
+          <img id="certImg" class="modal1-content" alt="Certificate" />
+        </div>
+
+        <script>
+          const modal = document.getElementById("certModal");
+          const modalImg = document.getElementById("certImg");
+          const closeBtn = document.querySelector(".close");
+
+          document.querySelectorAll(".view-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              modal.style.display = "block";
+              modalImg.src = btn.dataset.img;
+            });
+          });
+
+          closeBtn.onclick = () => {
+            modal.style.display = "none";
+          };
+          window.onclick = (e) => {
+            if (e.target == modal) modal.style.display = "none";
+          };
+        </script>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <div class="container">
+          <h2 class="section-title">
+            Get In <span class="gradient-text">Touch</span>
+          </h2>
+<!-- Contact boxes -->
+<div class="contact-boxes">
+
+  <!-- Email -->
+  <a
+    href="https://mail.google.com/mail/?view=cm&fs=1&to=nrk123786@gmail.com&su=Contact%20from%20Portfolio&body=Hello%20Naseer"
+    target="_blank"
+    class="contact-box-link"
+  >
+    <div class="contact-box">
+      <i class="fas fa-envelope"></i>
+
+      <h4>Email</h4>
+
+      <p>nrk123786@gmail.com</p>
+    </div>
+  </a>
+
+
+  <!-- Phone -->
+  <div class="contact-box">
+    <i class="fas fa-phone-alt"></i>
+
+    <h4>Phone</h4>
+
+    <p>+91 8309607825</p>
+  </div>
+
+
+  <!-- Location -->
+  <div class="contact-box">
+    <i class="fas fa-map-marker-alt"></i>
+
+    <h4>Location</h4>
+
+    <p>Vijayawada, India</p>
+  </div>
+
+</div>
+<style>
+/* ========================================
+   CONTACT BOXES
+======================================== */
+
+.contact-boxes {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 24px;
+
+    margin-top: 24px;
+
+    width: 100%;
+}
+
+
+/* ========================================
+   CONTACT BOX LINK
+======================================== */
+
+.contact-box-link {
+    text-decoration: none;
+
+    color: inherit;
+
+    display: block;
+
+    height: 100%;
+}
+
+
+/* ========================================
+   CONTACT BOX
+======================================== */
+
+.contact-box {
+    width: 100%;
+
+    min-height: 150px;
+
+    height: 150px;
+
+    box-sizing: border-box;
+
+    background: rgba(59, 130, 246, 0.08);
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    transition: 0.3s ease;
+
+    border: 1px solid rgba(59, 130, 246, 0.08);
+}
+
+
+/* ========================================
+   ICON
+======================================== */
+
+.contact-box i {
+    font-size: 28px;
+
+    color: var(--primary-light);
+
+    margin-bottom: 10px;
+}
+
+
+/* ========================================
+   TITLE
+======================================== */
+
+.contact-box h4 {
+    margin: 8px 0 4px;
+
+    font-size: 16px;
+}
+
+
+/* ========================================
+   TEXT
+======================================== */
+
+.contact-box p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   HOVER
+======================================== */
+
+.contact-box:hover {
+    transform: translateY(-5px);
+
+    border-color: var(--primary-light);
+
+    box-shadow:
+        0 8px 25px rgba(59, 130, 246, 0.15);
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 800px) {
+
+    .contact-boxes {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-box {
+        height: 140px;
+        min-height: 140px;
+    }
+}
+</style>
+
+              <!-- Follow Me Section -->
+              <div style="margin-top: 30px">
+                <h4 style="margin: 0 0 10px; text-align: center">Follow Me</h4>
+                <div style="display: flex; justify-content: center; gap: 16px">
+                  <a
+                    href="https://github.com/Lovely-Naseer"
+                    class="icon-btn"
+                    style="
+                      background: rgba(0, 0, 0, 0.04);
+                      border-radius: 8px;
+                      padding: 10px 14px;
+                      font-size: 22px;
+                    "
+                  >
+                    <i class="fab fa-github"></i>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/lovely-naseer"
+                    class="icon-btn"
+                    style="
+                      background: rgba(0, 0, 0, 0.04);
+                      border-radius: 8px;
+                      padding: 10px 14px;
+                      font-size: 22px;
+                    "
+                  >
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+                  <a
+                    href="https://www.instagram.com/__mr__shooter_"
+                    class="icon-btn"
+                    style="
+                      background: rgba(0, 0, 0, 0.04);
+                      border-radius: 8px;
+                      padding: 10px 14px;
+                      font-size: 22px;
+                    "
+                  >
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div>
+            <a class="brand" href="#">Naseer Khan</a>
+            <p style="margin: 6px 0 0; color: var(--muted)">
+              © Naseer 2026 All Rights Reserved
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ===== JS (theme, mobile menu, scroll, animations on scroll) ===== -->
+    <script>
+      // Elements
+      const htmlEl = document.documentElement;
+      const themeToggle = document.getElementById("theme-toggle");
+      const moonIcon = document.getElementById("moon-icon");
+      const sunIcon = document.getElementById("sun-icon");
+
+      // Initialize theme from localStorage or system
+      const initTheme = () => {
+        const saved = localStorage.getItem("theme");
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        htmlEl.classList.remove("light", "dark");
+        htmlEl.classList.add(theme);
+        updateThemeIcon();
+      };
+
+      const updateThemeIcon = () => {
+        if (htmlEl.classList.contains("dark")) {
+          moonIcon.style.display = "none";
+          sunIcon.style.display = "inline-block";
+        } else {
+          moonIcon.style.display = "inline-block";
+          sunIcon.style.display = "none";
+        }
+      };
+
+      themeToggle.addEventListener("click", () => {
+        htmlEl.classList.toggle("dark");
+        const theme = htmlEl.classList.contains("dark") ? "dark" : "light";
+        localStorage.setItem("theme", theme);
+        updateThemeIcon();
+      });
+
+      initTheme();
+
+      // Mobile navigation
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+
+      function closeMobileMenu() {
+        if (!mobileMenu || !mobileMenuButton) return;
+
+        mobileMenu.classList.remove("open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+        mobileMenuButton.setAttribute("aria-expanded", "false");
+        mobileMenuButton.setAttribute("aria-label", "Open mobile menu");
+
+        const icon = mobileMenuButton.querySelector("i");
+        if (icon) {
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        }
+      }
+
+      function toggleMobileMenu() {
+        if (!mobileMenu || !mobileMenuButton) return;
+
+        const open = mobileMenu.classList.toggle("open");
+
+        mobileMenu.setAttribute("aria-hidden", String(!open));
+        mobileMenuButton.setAttribute("aria-expanded", String(open));
+        mobileMenuButton.setAttribute(
+          "aria-label",
+          open ? "Close mobile menu" : "Open mobile menu",
+        );
+
+        const icon = mobileMenuButton.querySelector("i");
+        if (icon) {
+          icon.classList.toggle("fa-bars", !open);
+          icon.classList.toggle("fa-xmark", open);
+        }
+      }
+
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleMobileMenu();
+        });
+
+        mobileLinks.forEach((link) => {
+          link.addEventListener("click", closeMobileMenu);
+        });
+
+        document.addEventListener("click", (event) => {
+          if (
+            mobileMenu.classList.contains("open") &&
+            !mobileMenu.contains(event.target) &&
+            !mobileMenuButton.contains(event.target)
+          ) {
+            closeMobileMenu();
+          }
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth > 751) {
+            closeMobileMenu();
+          }
+        });
+      }
+
+      // Smooth offset scroll for anchor links because header is fixed
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+          if (!href || href === "#") return;
+          const target = document.querySelector(href);
+          if (!target) return;
+          e.preventDefault();
+          const headerHeight =
+            document.querySelector(".site-header").offsetHeight;
+          const targetY =
+            target.getBoundingClientRect().top +
+            window.scrollY -
+            headerHeight -
+            12;
+          window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
+        });
+      });
+
+      // Animate elements when they come into view (simple)
+      function animateOnScroll() {
+        const els = document.querySelectorAll(
+          ".hero-left, .hero-right, .project-card, .skill-card, .about-card, .contact-card",
+        );
+        const screenPos = window.innerHeight / 1.2;
+        els.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < screenPos) {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+          }
+        });
+      }
+
+      // Set initial styles for animated elements
+      document.querySelectorAll(".hero-left").forEach((el) => {
+        el.style.opacity = 0;
+        el.style.animation = "fadeIn 0.5s ease-in-out forwards";
+      });
+      document.querySelectorAll(".hero-right").forEach((el) => {
+        el.style.opacity = 0;
+        el.style.transform = "translateY(20px)";
+        el.style.animation = "slideUp 0.5s ease-out forwards";
+      });
+
+      window.addEventListener("scroll", animateOnScroll);
+      window.addEventListener("load", animateOnScroll);
+    </script>
+    <!-- ===================== RESUME SCRIPT ===================== -->
+  
+    <script>
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const hero = document.getElementById("home");
+        const video = document.getElementById("heroVideo");
+        const soundToggle = document.getElementById("soundToggle");
+        const soundIcon = document.getElementById("soundIcon");
+        const soundLabel = document.querySelector(".hero-sound-label");
+
+        if (!hero || !video) return;
+
+        let soundEnabled = false;
+
+        const updateSoundUI = () => {
+          if (!soundIcon || !soundToggle) return;
+
+          soundIcon.className = soundEnabled
+            ? "fas fa-volume-high"
+            : "fas fa-volume-xmark";
+
+          soundToggle.setAttribute(
+            "aria-label",
+            soundEnabled ? "Turn sound off" : "Turn sound on",
+          );
+
+          soundToggle.setAttribute(
+            "title",
+            soundEnabled ? "Turn sound off" : "Turn sound on",
+          );
+
+          if (soundLabel) {
+            soundLabel.textContent = soundEnabled ? "Sound off" : "Sound on";
+          }
+        };
+
+        const playHeroVideo = () => {
+          video.muted = !soundEnabled;
+
+          video.play().catch(() => {
+            // Autoplay may be blocked until the user interacts with the page.
+          });
+        };
+
+        video.muted = true;
+        video.playsInline = true;
+        updateSoundUI();
+
+        if (soundToggle) {
+          soundToggle.addEventListener("click", async () => {
+            soundEnabled = !soundEnabled;
+            video.muted = !soundEnabled;
+
+            if (soundEnabled) {
+              video.volume = 0.8;
+            }
+
+            updateSoundUI();
+
+            try {
+              await video.play();
+            } catch (error) {
+              console.warn("Video playback was blocked:", error);
+            }
+          });
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            if (!entry) return;
+
+            if (entry.isIntersecting) {
+              playHeroVideo();
+            } else {
+              video.pause();
+            }
+          },
+          {
+            threshold: 0.35,
+          },
+        );
+
+        observer.observe(hero);
+
+        // If the browser pauses media when the tab changes visibility,
+        // resume only when Home is visible again.
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) {
+            const rect = hero.getBoundingClientRect();
+            const visibleHeight =
+              Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+            const visibleRatio = visibleHeight / Math.max(rect.height, 1);
+
+            if (visibleRatio >= 0.35) {
+              playHeroVideo();
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
